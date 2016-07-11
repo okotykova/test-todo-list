@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<title>TODO List</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="TODO List">
+	<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+    <!--build:css css/styles.min.css-->
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <!-- endbuild -->
+
+    <!--script data-main="js/main" src="js/require.js"></script-->
+    <script type='text/javascript' src='js/require.js'></script>
+    <script type='text/javascript' src='js/main.js' ></script>
+
+    <!--build:js js/main.min.js -->
+    <!--script src="js/main.js"></script>
+	<script src="js/model.js"></script-->
+    <!-- endbuild -->
+</head>
+
+<body >
+
+    <div id="templates">
+        <!-- to-do list template -->
+        <script type="text/template" id="tpl-todo-list">
+            <h1>TODO list</h1>
+            <ul id="todo-list">
+            </ul>
+            <div class="bottom-buttons">
+                <button type="button" class="my-btn delete-all">Delete All</button>
+                <button type="button" class="my-btn mark-all-done">Mark All as Done</button>
+            </div>
+        </script>
+
+        <!-- to-do list item template -->
+        <script type="text/template" id="tpl-todo-list-item">
+            <li class="">
+                <div class="name">
+                    <a href="#/task:${task.ID}">
+
+                    </a>
+                </div>
+                <button type="button" class="my-btn mark-item-done">Mark as Done</button>
+                <button type="button" class="my-btn delete-item">X</button>
+            </li>
+        </script>
+
+        <!-- to-do list item page template -->
+        <script type="text/template" id="tpl-todo-list-item-page">
+                <a href="#/list">Back to List</a>
+                <div class="name"></div>
+                <div class="description"></div>
+
+                <button type="button" class="my-btn mark-item-done">Mark as Done</button>
+                <button type="button" class="my-btn delete-item">X</button>
+
+        </script>
+    </div>
+
+    <div id="page">
+        <a href="#/list">
+            LIST
+        </a>
+    </div>
+
+</body>
+</html>
