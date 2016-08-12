@@ -7,12 +7,14 @@
 	<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
     <!--build:css css/styles.min.css-->
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./app/css/styles.css" />
     <!-- endbuild -->
 
     <!--script data-main="js/main" src="js/require.js"></script-->
-    <script type='text/javascript' src='js/require.js'></script>
-    <script type='text/javascript' src='js/main.js' ></script>
+
+    <!--script type='text/javascript' src='./bower_components/backbone-localstorage/backbone-localstorage'></script-->
+    <script type='text/javascript' src='./app/js/require.js'></script>
+    <script type='text/javascript' src='./app/js/main.js' ></script>
 
     <!--build:js js/main.min.js -->
     <!--script src="js/main.js"></script>
@@ -36,26 +38,31 @@
 
         <!-- to-do list item template -->
         <script type="text/template" id="tpl-todo-list-item">
-            <li class="">
+            <li id="<%= ID %>" class="<%= status %>">
                 <div class="name">
-                    <a href="#/task:${task.ID}">
-
+                    <a href="#/task/<%= ID %>">
+                    <%= name %>
                     </a>
                 </div>
-                <button type="button" class="my-btn mark-item-done">Mark as Done</button>
+                <div class="description">
+                    <%= description %>
+                </div>
                 <button type="button" class="my-btn delete-item">X</button>
+                <button type="button" class="my-btn mark-item-done">Mark as <% if(status == 'done') { %><%= 'un' %><% } %>done</button>
+
             </li>
         </script>
 
         <!-- to-do list item page template -->
         <script type="text/template" id="tpl-todo-list-item-page">
-                <a href="#/list">Back to List</a>
-                <div class="name"></div>
-                <div class="description"></div>
+                <h1><a href="#/list">Back to List</a></h1>
+                <div class="task-item <%= task.get('status') %>" id="<%= task.get('ID') %>">
+                    <div class="name"><%= task.get('name') %></div>
+                    <div class="description"><%= task.get('description') %></div>
 
-                <button type="button" class="my-btn mark-item-done">Mark as Done</button>
-                <button type="button" class="my-btn delete-item">X</button>
-
+                    <button type="button" class="my-btn mark-item-done">Mark as done</button>
+                    <!--button type="button" class="my-btn delete-item">X</button-->
+                </div>
         </script>
     </div>
 

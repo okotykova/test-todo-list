@@ -1,6 +1,58 @@
-.testing {
-  width: percentage(5/8);
+$main-color: #dcdcdc;
+$bg-color: whitesmoke;
+$font-color: gray;
+$link-color: forestgreen;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
 }
+@mixin btn-style($weight, $style, $color) {
+  background: $main-color;
+  border: $weight $style darken($color, 20%);
+  border-left: $weight $style lighten($color, 2%);
+  border-top: $weight $style lighten($color, 2%);
+  @include border-radius(0);
+}
+
+
 body {
-  background: yellowgreen;
+  background: darken($bg-color, 5%);
+  color: $font-color;
+}
+
+ul {
+  list-style: none;
+  padding: 40px;
+}
+.my-btn{
+
+  @include btn-style(1px, solid, $main-color);
+
+  padding: 4px 8px;
+  margin: 0 10px;
+}
+#todo-list li, .task-item{
+  padding: 10px;
+  border-bottom: 1px solid lighten($bg-color, 20%);
+  .my-btn{
+    float: right;
+  }
+  div{
+    display: inline-block;
+    width: 33%;
+  }
+  &.undone{
+    a{
+      color: $font-color;
+    }
+  }
+  &.done{
+    color: $link-color;
+    a{
+      color: $link-color;
+    }
+  }
 }

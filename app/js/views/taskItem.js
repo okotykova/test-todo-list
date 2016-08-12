@@ -2,9 +2,8 @@
 define([
     'jquery',
     'underscore',
-    'backbone' //,
-    //'text!templates/todo-list-item.html'
-//], function($, _, Backbone, taskModel, taskListItemTemplate) {
+    'backbone',
+    'app/js/models/taskModel'
 ], function($, _, Backbone, taskModel) {
     var taskListItemView = Backbone.View.extend({
         el: '#todo-list',
@@ -17,26 +16,37 @@ define([
         },
 
         deleteTask: function (e) {
+            var currentID = $(e.target).closest('li').attr('id');
+            if(this.model.get('ID') == currentID) {
+                this.model.destroy();
+                this.render();
+            }
+
         },
 
         markTaskAsDone: function (e) {
+            var currentID = $(e.target).closest('li').attr('id');
+            if(this.model.get('ID') == currentID)
+                this.model.changeStatus();
         },
 
         initialize: function(){
-            this.model = new taskModel();
-            this.$el.html(this.template(this.model.toJSON()));
-            //var compiledTemplate = _.template( taskListItemTemplate, { tasks: this.model } );
-            //this.$el.html(compiledTemplate);
+
+            this.render();
+        },
+
+        remove: function() {
+            this.render();
         },
 
         render: function () {
-
-           /* this.$el.html(this.template(this.model.toJSON()));
-            return this;*/
+            $(this.el).append(this.template(this.model.toJSON()));
+            return this;
         },
 
         makeUI: function () {
         }
     });
+    return taskListItemView;
 });
 

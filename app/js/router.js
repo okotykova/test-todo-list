@@ -1,18 +1,19 @@
-'use strict';
-
 define([
     'jquery',
     'underscore',
     'backbone',
-    'js/views/list',
-   // 'views/taskItem',
-    'js/views/taskItemDescription'
-], function($, _, Backbone, listView, taskView){
+    'storage',
+    'app/js/views/list',
+    'app/js/views/taskItemDescription',
+    'app/js/collections/taskModel'
+], function($, _, Backbone, Storage, listView, taskView, taskCollection){
+
+    'use strict';
 
     var AppRouter = Backbone.Router.extend({
         routes: {
             'list': 'tasksList',
-            'task:ID': 'taskDescription',
+            'task/:ID': 'taskDescription',
             '*path':  'redirectToList'
         },
 
@@ -23,12 +24,10 @@ define([
 
         tasksList: function() {
             var tasksList = new listView();
-            tasksList.render().makeUI();
         },
 
         taskDescription: function(ID){
-            var tasksDescription = new taskView();
-              tasksDescription.render().makeUI();
+            var tasksDescription = new taskView({ID : ID});
         }
     });
 
