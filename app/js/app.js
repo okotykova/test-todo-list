@@ -1,10 +1,12 @@
-'use strict';
-
 define(['jquery',
         'underscore',
         'backbone',
-        'js/router'
-], function($, _, Backbone, Router){
+        'storage',
+        'app/js/router'
+], function($, _, Backbone, Storage, Router){
+
+    'use strict';
+
     var initialize = function(){
         Router.initialize();
     };

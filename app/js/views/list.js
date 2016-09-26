@@ -1,17 +1,17 @@
-'use strict';
-
 define([
     'jquery',
     'underscore',
     'backbone',
-    'js/collections/taskModel'
-    //'text!templates/t-odo-list.html'
-//], function($, _, Backbone, tasksCollection, taskListTemplate){
-], function($, _, Backbone, tasksCollection){
+    'app/js/collections/taskModel',
+    'app/js/views/taskItem'
+], function($, _, Backbone, tasksCollection, taskListItemView){
+
+    "use strict";
+
     var tasksListView = Backbone.View.extend({
         el: '#page',
 
-       // template: _.template($('#tpl-to-do-list').html()),
+        template: _.template($('#tpl-todo-list').html()),
 
         events: {
             'click .delete-all': 'deleteAllTasks',
@@ -19,25 +19,35 @@ define([
         },
 
         deleteAllTasks: function(e) {
+            _.invoke(this.collection.toArray(), 'destroy');
         },
 
         markAllTasksAsDone: function(e) {
+            var self = this;
+            self.collection.each(function(element) {
+                element.markAsDone();
+            });
+
         },
 
         initialize: function(){
             this.collection = new tasksCollection();
-            var tasks = this.collection.models;
-            var compiledTemplate = _.template( $('#tpl-todo-list').html(), { tasks: tasks } );
-            this.$el.html(compiledTemplate);
-            console.log('tasks '+JSON.stringify(tasks));
-            tasks.forEach(function(element){
-                var view = new taskModel({model: element, template: '#tpl-todo-list-item'});
-                this.$('#todo-list').append(view.render().el);
+            var self = this;
+            this.collection.bind('change', this.render, this);
+            this.collection.bind('destroy', this.render, this);
+            this.collection.fetch({reset: true}).done(function () {
+                self.render();
             });
         },
 
         render: function(){
-            console.log('render view');
+            var self = this,
+                viewItem;
+            self.$el.empty().html(this.template());
+            self.collection.each(function(element) {
+                viewItem = new taskListItemView({model: element});
+            });
+
             return this;
         },
 
@@ -47,4 +57,5 @@ define([
     });
 
     return tasksListView;
+
 });
