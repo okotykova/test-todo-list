@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "y",
   "directory": "src/components",
-  "homepage": "https://github.com/okotykova/test-todo-list",
+  "homepage": "https://github.com/okotykova/todoList",
   "authors": [
     "Olga Kotykova <okotykova@malkosua.com>"
   ],
   "main": "index.js",
   "keywords": [
-    "todo-list"
+    "todoList"
   ],
   "license": "MIT",
   "ignore": [

@@ -1,3 +1,4 @@
 /node-modules/*
-/app/.idea/*
-/app/js/bower_components/*
+/bower_components/*
+/dist/*
+/.idea/*

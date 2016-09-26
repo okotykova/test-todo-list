@@ -19,8 +19,8 @@ const dirs = {
 };
 const paths = {
     sass: {
-        src: `${dirs.src}/scss/**/*.scss`,
-        dest: `${dirs.src}/css`
+        src: `${dirs.src}/assets/scss/**/*.scss`,
+        dest: `${dirs.src}/assets/css`
     },
     js: {
         src: `${dirs.src}/*.js`
@@ -32,7 +32,7 @@ const paths = {
         src: `${dirs.src}/*.html`
     },
     images: {
-        src: `${dirs.src}/images/**/*.+(png|jpg|gif|svg)`,
+        src: `${dirs.src}/assets/images/**/*.+(png|jpg|gif|svg)`,
         dest: `${dirs.dest}/images`
     }
 };
